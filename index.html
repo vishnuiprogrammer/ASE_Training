@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aura Weather - Weather Forecast</title>
+    <!-- Font Awesome Icons  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <!-- MAIN CONTAINER -->
+    <div class="main-container">
+      <!-- HEADER -->
+      <div class="header">
+        <div class="header-title">Aura Weather</div>
+        <div class="header-icons">
+          <!-- Location button -->
+          <button class="icon-btn"><i class="fas fa-location-dot"></i></button>
+          <!-- Settings button -->
+          <button class="icon-btn"><i class="fas fa-gear"></i></button>
+        </div>
+      </div>
+
+      <!-- PAGE TITLE -->
+      <div class="weather-title">
+        <h1>Weather Forecast</h1>
+        <p>Check the weather for any city</p>
+      </div>
+
+      <!-- SEARCH BAR -->
+      <div class="search-container">
+        <div class="search-box">
+          <i class="fas fa-magnifying-glass search-icon"></i>
+
+          <input type="text" placeholder="Search city..." id="cityInput" />
+        </div>
+
+        <button class="search-btn" onclick="searchWeather()">Search</button>
+      </div>
+
+      <!-- WEATHER CARD -->
+      <div class="weather-card">
+        <div class="weather-card-content">
+          <div class="weather-card-header">
+            <div class="city-info">
+              <h2 id="cityName">Pune</h2>
+              <p id="weatherDesc">CLEAR SKY</p>
+            </div>
+
+            <div class="weather-icon">
+              <i id="weatherIcon" class="fas fa-sun"></i>
+            </div>
+          </div>
+
+          <div class="temperature-section">
+            <span class="temperature" id="temp">28</span>
+            <span class="temp-unit">°C</span>
+          </div>
+
+          <div class="weather-details">
+            <!-- Feels like -->
+            <div class="detail-item">
+              <div class="detail-item-icon"><i class="fas fa-droplet"></i></div>
+              <span>Feels like <strong id="feelsLike">28</strong>°C</span>
+            </div>
+            <!-- Humidity -->
+            <div class="detail-item">
+              <div class="detail-item-icon"><i class="fas fa-water"></i></div>
+              <span>Humidity <strong id="humidity">45</strong>%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATS GRID - 4 cards for wind, pressure, visibility, clouds -->
+      <div class="stats-grid">
+        <!-- Wind Speed Card -->
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-wind"></i></div>
+          <div class="stat-label">Wind Speed</div>
+          <div class="stat-value" id="windSpeed">2.62 m/s</div>
+        </div>
+
+        <!-- Pressure Card -->
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-gauge"></i></div>
+          <div class="stat-label">Pressure</div>
+          <div class="stat-value" id="pressure">1008 hPa</div>
+        </div>
+
+        <!-- Visibility Card -->
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-eye"></i></div>
+          <div class="stat-label">Visibility</div>
+          <div class="stat-value" id="visibility">10 km</div>
+        </div>
+
+        <!-- Cloud Cover Card -->
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-cloud"></i></div>
+          <div class="stat-label">Cloud Cover</div>
+          <div class="stat-value" id="clouds">2%</div>
+        </div>
+        <!-- Sunrise Card (Default) -->
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-sun"></i></div>
+          <div class="stat-label">Sunrise</div>
+          <div class="stat-value" id="sunrise">6:00 AM</div>
+        </div>
+
+        <!-- Sunset Card (Default) -->
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-moon"></i></div>
+          <div class="stat-label">Sunset</div>
+          <div class="stat-value" id="sunset">6:30 PM</div>
+        </div>
+      </div>
+
+      <!-- TEMPERATURE RANGE - Shows min and max temperature -->
+      <div class="temp-range-card">
+        <div class="temp-range-label">
+          <i class="fas fa-thermometer"></i> Daily Range
+        </div>
+        <!-- Gradient bar -->
+        <div class="temp-range-bar"></div>
+        <!-- Min and Max values -->
+        <div class="temp-range-values">
+          <span>Min: <strong id="minTemp">28</strong>°C</span>
+          <span>Max: <strong id="maxTemp">30</strong>°C</span>
+        </div>
+      </div>
+
+      <!-- BOTTOM NAVIGATION  -->
+      <div class="bottom-nav">
+        <!-- Home -->
+        <div class="nav-item active">
+          <div class="nav-item-icon"><i class="fas fa-house"></i></div>
+          <div class="nav-item-label">Home</div>
+        </div>
+
+        <!-- Forecast -->
+        <div class="nav-item">
+          <div class="nav-item-icon"><i class="fas fa-calendar"></i></div>
+          <div class="nav-item-label">Forecast</div>
+        </div>
+
+        <!-- Saved -->
+        <div class="nav-item">
+          <div class="nav-item-icon"><i class="fas fa-heart"></i></div>
+          <div class="nav-item-label">Saved</div>
+        </div>
+
+        <!-- Profile -->
+        <div class="nav-item">
+          <div class="nav-item-icon"><i class="fas fa-user"></i></div>
+          <div class="nav-item-label">Profile</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
