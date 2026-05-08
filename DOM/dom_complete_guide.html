@@ -1,0 +1,1130 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Fraunces:ital,wght@0,400;0,700;1,400&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: var(--color-text-primary);
+    --muted: var(--color-text-secondary);
+    --bg: var(--color-background-primary);
+    --bg2: var(--color-background-secondary);
+    --border: var(--color-border-tertiary);
+    --accent: #2563EB;
+    --accent-light: #EFF6FF;
+    --green: #059669;
+    --green-light: #ECFDF5;
+    --amber: #D97706;
+    --amber-light: #FFFBEB;
+    --red: #DC2626;
+    --red-light: #FEF2F2;
+    --purple: #7C3AED;
+    --purple-light: #F5F3FF;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  body { font-family: var(--font-sans); background: transparent; }
+
+  .shell {
+    display: flex;
+    min-height: 650px;
+    border: 0.5px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--bg);
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    width: 220px;
+    flex-shrink: 0;
+    background: var(--bg2);
+    border-right: 0.5px solid var(--border);
+    padding: 16px 0;
+    overflow-y: auto;
+  }
+  .sidebar-title {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0 16px 10px;
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--muted);
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .nav-item:hover { color: var(--ink); background: var(--bg); }
+  .nav-item.active {
+    color: var(--accent);
+    background: var(--bg);
+    border-left-color: var(--accent);
+    font-weight: 500;
+  }
+  .nav-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: currentColor; flex-shrink: 0;
+  }
+
+  /* CONTENT */
+  .content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 28px 32px;
+    max-width: 700px;
+  }
+
+  .section { display: none; }
+  .section.active { display: block; }
+
+  .section-header {
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .section-tag {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .section-desc {
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* PROSE */
+  p { font-size: 14px; color: var(--ink); line-height: 1.7; margin-bottom: 12px; }
+  h3 { font-size: 15px; font-weight: 500; color: var(--ink); margin: 20px 0 8px; }
+  h4 { font-size: 13px; font-weight: 500; color: var(--muted); margin: 14px 0 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* CODE */
+  pre {
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin: 12px 0;
+    overflow-x: auto;
+  }
+  code {
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+  .ic { font-family: var(--mono); font-size: 12px; background: var(--bg2); padding: 1px 5px; border-radius: 4px; color: var(--accent); }
+  .kw { color: var(--purple); }
+  .str { color: var(--green); }
+  .fn { color: var(--accent); }
+  .cm { color: var(--muted); font-style: italic; }
+  .sel { color: var(--amber); }
+
+  /* CARDS */
+  .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
+  .card {
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+  }
+  .card-label { font-size: 11px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+  .card-val { font-family: var(--mono); font-size: 12px; color: var(--ink); }
+
+  /* BADGES */
+  .badge {
+    display: inline-block;
+    font-size: 11px; font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-right: 4px; margin-bottom: 4px;
+  }
+  .badge-blue { background: var(--accent-light); color: var(--accent); }
+  .badge-green { background: var(--green-light); color: var(--green); }
+  .badge-amber { background: var(--amber-light); color: var(--amber); }
+  .badge-red { background: var(--red-light); color: var(--red); }
+  .badge-purple { background: var(--purple-light); color: var(--purple); }
+
+  /* CALLOUT */
+  .callout {
+    border-left: 3px solid;
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    margin: 12px 0;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .callout-info { border-color: var(--accent); background: var(--accent-light); color: var(--accent); }
+  .callout-tip { border-color: var(--green); background: var(--green-light); color: var(--green); }
+  .callout-warn { border-color: var(--amber); background: var(--amber-light); color: var(--amber); }
+
+  /* LIVE DEMO */
+  .demo-box {
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 14px 0;
+  }
+  .demo-bar {
+    background: var(--bg2);
+    border-bottom: 0.5px solid var(--border);
+    padding: 8px 14px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .demo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+  .demo-inner { padding: 16px; }
+
+  /* INTERACTIVE ELEMENTS */
+  .demo-input {
+    width: 100%; padding: 8px 12px;
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--ink);
+    margin-bottom: 8px;
+    outline: none;
+    font-family: var(--font-sans);
+    transition: border-color 0.15s;
+  }
+  .demo-input:focus { border-color: var(--accent); }
+  .demo-btn {
+    padding: 7px 16px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-right: 6px;
+    transition: opacity 0.15s;
+    font-family: var(--font-sans);
+  }
+  .demo-btn:hover { opacity: 0.85; }
+  .demo-btn-out {
+    padding: 7px 16px;
+    background: transparent;
+    color: var(--accent);
+    border: 0.5px solid var(--accent);
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    transition: background 0.15s;
+  }
+  .demo-btn-out:hover { background: var(--accent-light); }
+  .demo-output {
+    margin-top: 10px;
+    padding: 10px 12px;
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink);
+    min-height: 36px;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+
+  /* TREE */
+  .tree { margin: 10px 0; }
+  .tree-node {
+    display: flex; align-items: flex-start;
+    margin: 3px 0;
+    font-family: var(--mono); font-size: 12px;
+  }
+  .tree-indent { color: var(--border); margin-right: 4px; }
+  .tree-tag { color: var(--accent); }
+  .tree-attr { color: var(--amber); }
+  .tree-text { color: var(--green); }
+  .tree-bracket { color: var(--muted); }
+
+  /* FLOW */
+  .flow { display: flex; align-items: center; gap: 0; margin: 14px 0; flex-wrap: wrap; }
+  .flow-step {
+    padding: 8px 14px;
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .flow-arrow { color: var(--muted); padding: 0 6px; font-size: 14px; }
+
+  /* TABLE */
+  .tbl { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+  .tbl th { background: var(--bg2); font-weight: 500; color: var(--muted); text-align: left; padding: 8px 12px; border-bottom: 0.5px solid var(--border); }
+  .tbl td { padding: 8px 12px; border-bottom: 0.5px solid var(--border); color: var(--ink); }
+  .tbl tr:last-child td { border-bottom: none; }
+
+  /* PROGRESS */
+  #progress-bar { height: 2px; background: var(--accent); transition: width 0.3s; border-radius: 1px; position: sticky; top: 0; z-index: 10; }
+
+  /* FETCH STATE */
+  .state-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 500;
+  }
+  .state-idle { background: var(--bg2); color: var(--muted); }
+  .state-loading { background: var(--amber-light); color: var(--amber); }
+  .state-success { background: var(--green-light); color: var(--green); }
+  .state-error { background: var(--red-light); color: var(--red); }
+  .spin { animation: spin 0.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+
+<div style="position:sticky;top:0;z-index:20;height:2px;background:var(--border)"><div id="progress-bar" style="width:10%;height:2px;background:var(--accent);transition:width 0.3s"></div></div>
+
+<div class="shell">
+  <nav class="sidebar">
+    <div class="sidebar-title">DOM Mastery</div>
+    <div class="nav-item active" onclick="go(0)"><span class="nav-dot"></span>What is the DOM?</div>
+    <div class="nav-item" onclick="go(1)"><span class="nav-dot"></span>Selecting Elements</div>
+    <div class="nav-item" onclick="go(2)"><span class="nav-dot"></span>Reading & Writing</div>
+    <div class="nav-item" onclick="go(3)"><span class="nav-dot"></span>Creating & Deleting</div>
+    <div class="nav-item" onclick="go(4)"><span class="nav-dot"></span>Events & Listeners</div>
+    <div class="nav-item" onclick="go(5)"><span class="nav-dot"></span>Event Bubbling</div>
+    <div class="nav-item" onclick="go(6)"><span class="nav-dot"></span>Forms & User Data</div>
+    <div class="nav-item" onclick="go(7)"><span class="nav-dot"></span>Fetch API</div>
+    <div class="nav-item" onclick="go(8)"><span class="nav-dot"></span>Async / Await</div>
+    <div class="nav-item" onclick="go(9)"><span class="nav-dot"></span>Rendering Data</div>
+    <div class="nav-item" onclick="go(10)"><span class="nav-dot"></span>Storage APIs</div>
+    <div class="nav-item" onclick="go(11)"><span class="nav-dot"></span>Live Playground</div>
+  </nav>
+
+  <main class="content">
+
+    <!-- 0: WHAT IS DOM -->
+    <div class="section active" id="s0">
+      <div class="section-header">
+        <div class="section-tag">Chapter 01</div>
+        <div class="section-title">What is the DOM?</div>
+        <div class="section-desc">The Document Object Model — the bridge between your HTML and JavaScript.</div>
+      </div>
+      <p>When a browser loads an HTML page, it parses the markup and builds a tree of objects in memory. This tree is the <strong>DOM</strong>. Every tag becomes a <em>node</em>; JavaScript can read and rewrite any node at any time, making the page dynamic without a reload.</p>
+      <div class="callout callout-info">Think of HTML as a <em>recipe</em> and the DOM as the <em>cooked meal</em> — the browser cooks the HTML into a live, editable object tree.</div>
+
+      <h3>The Node Tree</h3>
+      <div class="tree">
+        <div class="tree-node"><span class="tree-tag">document</span></div>
+        <div class="tree-node"><span class="tree-indent">└─ </span><span class="tree-tag">&lt;html&gt;</span></div>
+        <div class="tree-node"><span class="tree-indent">&nbsp;&nbsp;&nbsp;├─ </span><span class="tree-tag">&lt;head&gt;</span></div>
+        <div class="tree-node"><span class="tree-indent">&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;└─ </span><span class="tree-tag">&lt;title&gt;</span><span class="tree-text">"My Page"</span><span class="tree-tag">&lt;/title&gt;</span></div>
+        <div class="tree-node"><span class="tree-indent">&nbsp;&nbsp;&nbsp;└─ </span><span class="tree-tag">&lt;body&gt;</span></div>
+        <div class="tree-node"><span class="tree-indent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─ </span><span class="tree-tag">&lt;h1 </span><span class="tree-attr">id=<span class="tree-text">"title"</span></span><span class="tree-tag">&gt;</span><span class="tree-text">"Hello"</span><span class="tree-tag">&lt;/h1&gt;</span></div>
+        <div class="tree-node"><span class="tree-indent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─ </span><span class="tree-tag">&lt;p </span><span class="tree-attr">class=<span class="tree-text">"intro"</span></span><span class="tree-tag">&gt;</span><span class="tree-text">"World"</span><span class="tree-tag">&lt;/p&gt;</span></div>
+      </div>
+
+      <div class="card-grid">
+        <div class="card"><div class="card-label">Node Types</div><div class="card-val">Element, Text, Comment, Document</div></div>
+        <div class="card"><div class="card-label">Root</div><div class="card-val">document → document.documentElement</div></div>
+        <div class="card"><div class="card-label">Entry point</div><div class="card-val">document (the global object)</div></div>
+        <div class="card"><div class="card-label">Live?</div><div class="card-val">Yes — changes reflect instantly in UI</div></div>
+      </div>
+
+      <h3>Node Relationships</h3>
+      <table class="tbl">
+        <tr><th>Property</th><th>Returns</th></tr>
+        <tr><td><span class="ic">node.parentNode</span></td><td>The direct parent</td></tr>
+        <tr><td><span class="ic">node.childNodes</span></td><td>NodeList of all children (incl. text)</td></tr>
+        <tr><td><span class="ic">node.children</span></td><td>HTMLCollection of element children only</td></tr>
+        <tr><td><span class="ic">node.firstElementChild</span></td><td>First child element</td></tr>
+        <tr><td><span class="ic">node.nextElementSibling</span></td><td>Next sibling element</td></tr>
+      </table>
+
+      <div class="demo-box">
+        <div class="demo-bar"><span class="demo-dot"></span> Live — inspect document node counts</div>
+        <div class="demo-inner">
+          <button class="demo-btn" onclick="inspectDoc()">Inspect document</button>
+          <div class="demo-output" id="doc-out">Click to inspect...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1: SELECTING -->
+    <div class="section" id="s1">
+      <div class="section-header">
+        <div class="section-tag">Chapter 02</div>
+        <div class="section-title">Selecting Elements</div>
+        <div class="section-desc">Six ways to find elements — from ancient to modern.</div>
+      </div>
+
+      <h3>The Modern Pair (use these)</h3>
+      <pre><code><span class="cm">// Returns FIRST matching element (or null)</span>
+<span class="kw">const</span> el = document.<span class="fn">querySelector</span>(<span class="str">'#myId'</span>);
+<span class="kw">const</span> el = document.<span class="fn">querySelector</span>(<span class="str">'.card'</span>);
+<span class="kw">const</span> el = document.<span class="fn">querySelector</span>(<span class="str">'ul li:first-child'</span>);
+
+<span class="cm">// Returns NodeList of ALL matches</span>
+<span class="kw">const</span> els = document.<span class="fn">querySelectorAll</span>(<span class="str">'p.intro'</span>);
+els.<span class="fn">forEach</span>(el => <span class="fn">console</span>.<span class="fn">log</span>(el));</code></pre>
+
+      <h3>Legacy Selectors (still useful)</h3>
+      <pre><code><span class="fn">getElementById</span>(<span class="str">'id'</span>)       <span class="cm">// fastest — direct lookup</span>
+<span class="fn">getElementsByClassName</span>(<span class="str">'c'</span>) <span class="cm">// live HTMLCollection</span>
+<span class="fn">getElementsByTagName</span>(<span class="str">'div'</span>) <span class="cm">// live HTMLCollection</span>
+<span class="fn">getElementsByName</span>(<span class="str">'email'</span>) <span class="cm">// used for form fields</span></code></pre>
+
+      <div class="callout callout-warn">
+        <strong>Live vs Static:</strong> <span class="ic">getElementsBy*</span> returns a <em>live</em> collection — it updates automatically when the DOM changes. <span class="ic">querySelectorAll</span> returns a static snapshot. Choose deliberately.
+      </div>
+
+      <h3>CSS Selector Cheatsheet</h3>
+      <table class="tbl">
+        <tr><th>Selector</th><th>Matches</th></tr>
+        <tr><td><span class="ic">#id</span></td><td>Element with that id</td></tr>
+        <tr><td><span class="ic">.class</span></td><td>Elements with that class</td></tr>
+        <tr><td><span class="ic">div p</span></td><td>p descendants of div</td></tr>
+        <tr><td><span class="ic">div > p</span></td><td>Direct p children of div</td></tr>
+        <tr><td><span class="ic">input[type="text"]</span></td><td>Attribute match</td></tr>
+        <tr><td><span class="ic">li:nth-child(2)</span></td><td>Second li</td></tr>
+        <tr><td><span class="ic">a:hover</span></td><td>Hovered anchor (pseudo-class)</td></tr>
+      </table>
+
+      <div class="demo-box">
+        <div class="demo-bar"><span class="demo-dot"></span> Try a selector</div>
+        <div class="demo-inner">
+          <input class="demo-input" id="sel-in" placeholder="e.g.  body, h3, .demo-btn" value="body"/>
+          <button class="demo-btn" onclick="trySelector()">Run querySelector</button>
+          <div class="demo-output" id="sel-out">Result appears here</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2: READING & WRITING -->
+    <div class="section" id="s2">
+      <div class="section-header">
+        <div class="section-tag">Chapter 03</div>
+        <div class="section-title">Reading &amp; Writing Content</div>
+        <div class="section-desc">Get and set text, HTML, attributes, styles, and classes.</div>
+      </div>
+
+      <h3>Text &amp; HTML Content</h3>
+      <pre><code><span class="kw">const</span> el = document.<span class="fn">querySelector</span>(<span class="str">'#box'</span>);
+
+<span class="cm">// READ</span>
+el.textContent  <span class="cm">// all text (safe — strips tags)</span>
+el.innerHTML    <span class="cm">// raw HTML string (careful: XSS risk!)</span>
+el.innerText    <span class="cm">// visible text only (respects CSS)</span>
+
+<span class="cm">// WRITE</span>
+el.textContent = <span class="str">'Safe text'</span>;
+el.innerHTML   = <span class="str">'&lt;strong&gt;Bold!&lt;/strong&gt;'</span>;</code></pre>
+
+      <h3>Attributes</h3>
+      <pre><code>el.<span class="fn">getAttribute</span>(<span class="str">'href'</span>)
+el.<span class="fn">setAttribute</span>(<span class="str">'href'</span>, <span class="str">'https://example.com'</span>)
+el.<span class="fn">removeAttribute</span>(<span class="str">'disabled'</span>)
+el.<span class="fn">hasAttribute</span>(<span class="str">'required'</span>)   <span class="cm">// → true/false</span>
+
+<span class="cm">// data-* attributes via dataset</span>
+el.dataset.userId   <span class="cm">// reads data-user-id="…"</span>
+el.dataset.userId = <span class="str">'42'</span>;</code></pre>
+
+      <h3>Styles &amp; Classes</h3>
+      <pre><code><span class="cm">// Inline style (camelCase)</span>
+el.style.backgroundColor = <span class="str">'blue'</span>;
+el.style.fontSize         = <span class="str">'18px'</span>;
+
+<span class="cm">// classList API (preferred!)</span>
+el.classList.<span class="fn">add</span>(<span class="str">'active'</span>)
+el.classList.<span class="fn">remove</span>(<span class="str">'hidden'</span>)
+el.classList.<span class="fn">toggle</span>(<span class="str">'open'</span>)    <span class="cm">// flip on/off</span>
+el.classList.<span class="fn">contains</span>(<span class="str">'active'</span>) <span class="cm">// → boolean</span>
+el.classList.<span class="fn">replace</span>(<span class="str">'old'</span>,<span class="str">'new'</span>)</code></pre>
+
+      <div class="demo-box">
+        <div class="demo-bar"><span class="demo-dot"></span> Live editor</div>
+        <div class="demo-inner">
+          <div id="rw-box" style="padding:12px;background:var(--bg2);border:0.5px solid var(--border);border-radius:8px;margin-bottom:10px;font-size:14px;transition:all 0.3s">Edit me with the buttons below!</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <button class="demo-btn" onclick="rwDemo('text')">Change text</button>
+            <button class="demo-btn" onclick="rwDemo('html')">Set innerHTML</button>
+            <button class="demo-btn" onclick="rwDemo('style')">Toggle style</button>
+            <button class="demo-btn" onclick="rwDemo('class')">Toggle class</button>
+          </div>
+          <div class="demo-output" id="rw-out" style="margin-top:8px"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3: CREATING & DELETING -->
+    <div class="section" id="s3">
+      <div class="section-header">
+        <div class="section-tag">Chapter 04</div>
+        <div class="section-title">Creating &amp; Deleting Elements</div>
+        <div class="section-desc">Build and destroy nodes dynamically — the core of dynamic UIs.</div>
+      </div>
+
+      <h3>Creating Nodes</h3>
+      <pre><code><span class="cm">// 1. Create</span>
+<span class="kw">const</span> div = document.<span class="fn">createElement</span>(<span class="str">'div'</span>);
+div.textContent = <span class="str">'Hello!'</span>;
+div.className   = <span class="str">'card'</span>;
+
+<span class="cm">// 2. Insert</span>
+parent.<span class="fn">appendChild</span>(div)         <span class="cm">// at end</span>
+parent.<span class="fn">prepend</span>(div)             <span class="cm">// at start</span>
+parent.<span class="fn">insertBefore</span>(div, ref)   <span class="cm">// before ref node</span>
+ref.<span class="fn">after</span>(div)                   <span class="cm">// modern: after ref</span>
+ref.<span class="fn">before</span>(div)                  <span class="cm">// modern: before ref</span></code></pre>
+
+      <h3>innerHTML vs createElement</h3>
+      <pre><code><span class="cm">// Fast but risky (XSS if user data injected!)</span>
+container.innerHTML += <span class="str">`&lt;li&gt;${userInput}&lt;/li&gt;`</span>;
+
+<span class="cm">// Safe — XSS-proof, better performance for many nodes</span>
+<span class="kw">const</span> li = document.<span class="fn">createElement</span>(<span class="str">'li'</span>);
+li.textContent = userInput; <span class="cm">// always safe</span>
+ul.<span class="fn">appendChild</span>(li);</code></pre>
+
+      <h3>Removing &amp; Cloning</h3>
+      <pre><code>el.<span class="fn">remove</span>()                  <span class="cm">// removes itself</span>
+parent.<span class="fn">removeChild</span>(child)    <span class="cm">// parent removes child</span>
+<span class="kw">const</span> copy = el.<span class="fn">cloneNode</span>(<span class="kw">true</span>)  <span class="cm">// deep clone</span>
+
+<span class="cm">// Replace an element</span>
+oldEl.<span class="fn">replaceWith</span>(newEl);
+
+<span class="cm">// Empty a container fast</span>
+container.innerHTML = <span class="str">''</span>;
+<span class="cm">// or</span>
+container.replaceChildren();</code></pre>
+
+      <div class="demo-box">
+        <div class="demo-bar"><span class="demo-dot"></span> Create &amp; delete live</div>
+        <div class="demo-inner">
+          <input class="demo-input" id="create-in" placeholder="Type an item name…" value="New item"/>
+          <div style="display:flex;gap:6px;margin-bottom:10px">
+            <button class="demo-btn" onclick="addItem()">Add item</button>
+            <button class="demo-btn-out" onclick="removeFirst()">Remove first</button>
+            <button class="demo-btn-out" onclick="clearList()">Clear all</button>
+          </div>
+          <ul id="demo-list" style="padding-left:18px;font-size:13px;color:var(--ink)"></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4: EVENTS -->
+    <div class="section" id="s4">
+      <div class="section-header">
+        <div class="section-tag">Chapter 05</div>
+        <div class="section-title">Events &amp; Listeners</div>
+        <div class="section-desc">React to anything the user does — clicks, keys, scrolls, and more.</div>
+      </div>
+
+      <h3>addEventListener (the correct way)</h3>
+      <pre><code><span class="kw">const</span> btn = document.<span class="fn">querySelector</span>(<span class="str">'button'</span>);
+
+btn.<span class="fn">addEventListener</span>(<span class="str">'click'</span>, <span class="kw">function</span>(event) {
+  <span class="fn">console</span>.<span class="fn">log</span>(event.target);   <span class="cm">// the element clicked</span>
+  <span class="fn">console</span>.<span class="fn">log</span>(event.type);     <span class="cm">// 'click'</span>
+  event.<span class="fn">preventDefault</span>();    <span class="cm">// stop default (e.g. form submit)</span>
+  event.<span class="fn">stopPropagation</span>();   <span class="cm">// stop bubbling</span>
+});
+
+<span class="cm">// Remove later</span>
+btn.<span class="fn">removeEventListener</span>(<span class="str">'click'</span>, handler);</code></pre>
+
+      <h3>Common Events</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin:10px 0">
+        <span class="badge badge-blue">click</span><span class="badge badge-blue">dblclick</span>
+        <span class="badge badge-green">keydown</span><span class="badge badge-green">keyup</span><span class="badge badge-green">keypress</span>
+        <span class="badge badge-amber">input</span><span class="badge badge-amber">change</span><span class="badge badge-amber">submit</span><span class="badge badge-amber">focus</span><span class="badge badge-amber">blur</span>
+        <span class="badge badge-purple">mouseover</span><span class="badge badge-purple">mouseout</span><span class="badge badge-purple">mousemove</span>
+        <span class="badge badge-red">scroll</span><span class="badge badge-red">resize</span><span class="badge badge-red">DOMContentLoaded</span>
+      </div>
+
+      <h3>The Event Object</h3>
+      <pre><code>el.<span class="fn">addEventListener</span>(<span class="str">'click'</span>, (e) => {
+  e.target        <span class="cm">// element that triggered</span>
+  e.currentTarget <span class="cm">// element listener is on</span>
+  e.clientX/Y     <span class="cm">// mouse coordinates</span>
+  e.key           <span class="cm">// which key was pressed</span>
+  e.shiftKey      <span class="cm">// was shift held?</span>
+  e.timeStamp     <span class="cm">// when it fired (ms)</span>
+});</code></pre>
+
+      <div class="demo-box">
+        <div class="demo-bar"><span class="demo-dot"></span> Event inspector</div>
+        <div class="demo-inner">
+          <div id="ev-target" style="height:60px;background:var(--bg2);border:0.5px dashed var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--muted);cursor:crosshair;user-select:none;margin-bottom:10px">
+            Move mouse / click / press keys here
+          </div>
+          <div class="demo-output" id="ev-out">Waiting for events...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5: BUBBLING -->
+    <div class="section" id="s5">
+      <div class="section-header">
+        <div class="section-tag">Chapter 06</div>
+        <div class="section-title">Event Bubbling &amp; Delegation</div>
+        <div class="section-desc">How events travel up the DOM — and how to exploit it.</div>
+      </div>
+
+      <h3>Bubbling</h3>
+      <p>When you click a <span class="ic">&lt;button&gt;</span> inside a <span class="ic">&lt;div&gt;</span> inside <span class="ic">&lt;body&gt;</span>, the click event <em>bubbles up</em> — it fires on button, then div, then body, then document, then window.</p>
+
+      <div class="flow">
+        <div class="flow-step">button</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">div</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">body</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">document</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">window</div>
+      </div>
+
+      <h3>Event Delegation</h3>
+      <p>Instead of attaching listeners to 1000 items, attach <em>one</em> listener to the parent and check <span class="ic">e.target</span>:</p>
+      <pre><code><span class="cm">// BAD: 1000 listeners</span>
+document.<span class="fn">querySelectorAll</span>(<span class="str">'li'</span>).<span class="fn">forEach</span>(li =>
+  li.<span class="fn">addEventListener</span>(<span class="str">'click'</span>, handle)
+);
+
+<span class="cm">// GOOD: 1 listener via delegation</span>
+document.<span class="fn">querySelector</span>(<span class="str">'ul'</span>).<span class="fn">addEventListener</span>(<span class="str">'click'</span>, (e) => {
+  <span class="kw">if</span> (e.target.<span class="fn">matches</span>(<span class="str">'li'</span>)) {
+    <span class="fn">handle</span>(e.target);
+  }
+});</code></pre>
+
+      <div class="callout callout-tip">Delegation also handles <em>dynamically added</em> items — elements added after the listener was registered are automatically covered.</div>
+
+      <pre><code><span class="cm">// Capture phase (top-down — opposite of bubbling)</span>
+el.<span class="fn">addEventListener</span>(<span class="str">'click'</span>, handler, { capture: <span class="kw">true</span> });
+
+<span class="cm">// Fire only once</span>
+el.<span class="fn">addEventListener</span>(<span class="str">'click'</span>, handler, { once: <span class="kw">true</span> });
+
+<span class="cm">// Stop bubbling</span>
+e.<span class="fn">stopPropagation</span>();</code></pre>
+
+      <div class="demo-box">
+        <div class="demo-bar"><span class="demo-dot"></span> Delegation demo</div>
+        <div class="demo-inner">
+          <ul id="del-list" style="list-style:none;padding:0;display:flex;flex-direction:column;gap:4px">
+            <li data-id="1" style="padding:8px 12px;background:var(--bg2);border-radius:6px;font-size:13px;cursor:pointer;border:0.5px solid var(--border)">Item A <small style="color:var(--muted)">(click any)</small></li>
+            <li data-id="2" style="padding:8px 12px;background:var(--bg2);border-radius:6px;font-size:13px;cursor:pointer;border:0.5px solid var(--border)">Item B</li>
+            <li data-id="3" style="padding:8px 12px;background:var(--bg2);border-radius:6px;font-size:13px;cursor:pointer;border:0.5px solid var(--border)">Item C</li>
+          </ul>
+          <div class="demo-output" id="del-out" style="margin-top:8px">Click an item — one listener handles all ↑</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6: FORMS -->
+    <div class="section" id="s6">
+      <div class="section-header">
+        <div class="section-tag">Chapter 07</div>
+        <div class="section-title">Forms &amp; User Data</div>
+        <div class="section-desc">Collect, validate, and process what users type.</div>
+      </div>
+
+      <h3>Reading Form Values</h3>
+      <pre><code><span class="cm">// Text / email / password / number</span>
+<span class="kw">const</span> val = input.value;
+
+<span class="cm">// Checkbox</span>
+<span class="kw">const</span> checked = input.checked;
+
+<span class="cm">// Select (dropdown)</span>
+<span class="kw">const</span> chosen = select.value;
+<span class="kw">const</span> label  = select.options[select.selectedIndex].text;
+
+<span class="cm">// All fields via FormData</span>
+<span class="kw">const</span> fd = <span class="kw">new</span> <span class="fn">FormData</span>(formElement);
+fd.<span class="fn">get</span>(<span class="str">'email'</span>);
+fd.<span class="fn">getAll</span>(<span class="str">'tags'</span>);         <span class="cm">// multi-select</span>
+[...fd.<span class="fn">entries</span>()]         <span class="cm">// iterate all fields</span>
+<span class="fn">Object</span>.<span class="fn">fromEntries</span>(fd)   <span class="cm">// convert to plain object</span></code></pre>
+
+      <h3>Preventing Default Submit</h3>
+      <pre><code>form.<span class="fn">addEventListener</span>(<span class="str">'submit'</span>, (e) => {
+  e.<span class="fn">preventDefault</span>();  <span class="cm">// stop page reload!</span>
+  <span class="kw">const</span> data = <span class="fn">Object</span>.<span class="fn">fromEntries</span>(<span class="kw">new</span> <span class="fn">FormData</span>(e.target));
+  <span class="fn">console</span>.<span class="fn">log</span>(data);   <span class="cm">// { name: 'Riya', age: '24' }</span>
+});</code></pre>
+
+      <div class="demo-box">
+        <div class="demo-bar"><span class="demo-dot"></span> Mini form</div>
+        <div class="demo-inner">
+          <input class="demo-input" id="f-name" placeholder="Your name"/>
+          <input class="demo-input" id="f-email" type="email" placeholder="Your email"/>
+          <select class="demo-input" id="f-role">
+            <option value="">Select role…</option>
+            <option>Frontend Dev</option>
+            <option>Backend Dev</option>
+            <option>Designer</option>
+          </select>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:13px">
+            <input type="checkbox" id="f-check"> <label for="f-check" style="color:var(--ink)">I agree to terms</label>
+          </div>
+          <button class="demo-btn" onclick="submitForm()">Submit (via JS)</button>
+          <div class="demo-output" id="f-out" style="margin-top:8px">Output appears here</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7: FETCH -->
+    <div class="section" id="s7">
+      <div class="section-header">
+        <div class="section-tag">Chapter 08</div>
+        <div class="section-title">Fetch API</div>
+        <div class="section-desc">Get data from servers — JSON, text, files — all asynchronously.</div>
+      </div>
+
+      <h3>Basic GET Request</h3>
+      <pre><code>fetch(<span class="str">'https://api.example.com/users'</span>)
+  .<span class="fn">then</span>(response => {
+    <span class="cm">// response.ok = true if status 200–299</span>
+    <span class="kw">if</span> (!response.ok) <span class="kw">throw new</span> <span class="fn">Error</span>(response.status);
+    <span class="kw">return</span> response.<span class="fn">json</span>();  <span class="cm">// parse JSON body</span>
+  })
+  .<span class="fn">then</span>(data => <span class="fn">console</span>.<span class="fn">log</span>(data))
+  .<span class="fn">catch</span>(err => <span class="fn">console</span>.<span class="fn">error</span>(err));</code></pre>
+
+      <h3>POST with JSON Body</h3>
+      <pre><code>fetch(<span class="str">'/api/users'</span>, {
+  method: <span class="str">'POST'</span>,
+  headers: { <span class="str">'Content-Type'</span>: <span class="str">'application/json'</span> },
+  body: <span class="fn">JSON</span>.<span class="fn">stringify</span>({ name: <span class="str">'Riya'</span>, age: 24 })
+}).<span class="fn">then</span>(r => r.<span class="fn">json</span>());</code></pre>
+
+      <h3>Response Object</h3>
+      <table class="tbl">
+        <tr><th>Property/Method</th><th>Description</th></tr>
+        <tr><td><span class="ic">response.status</span></td><td>HTTP status code (200, 404, etc.)</td></tr>
+        <tr><td><span class="ic">response.ok</span></td><td>true if status 200–299</td></tr>
+        <tr><td><span class="ic">response.json()</span></td><td>Parse body as JSON (Promise)</td></tr>
+        <tr><td><span class="ic">response.text()</span></td><td>Parse body as plain text (Promise)</td></tr>
+        <tr><td><span class="ic">response.blob()</span></td><td>Binary data (images, files)</td></tr>
+        <tr><td><span class="ic">response.headers</span></td><td>Response headers map</td></tr>
+      </table>
+
+      <div class="demo-box">
+        <div class="demo-bar"><span class="demo-dot"></span> Live fetch from JSONPlaceholder API</div>
+        <div class="demo-inner">
+          <div style="display:flex;gap:6px;margin-bottom:10px;align-items:center">
+            <button class="demo-btn" onclick="doFetch()">Fetch a user</button>
+            <span id="fetch-state" class="state-pill state-idle">idle</span>
+          </div>
+          <div class="demo-output" id="fetch-out">Hit Fetch to call the API</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8: ASYNC/AWAIT -->
+    <div class="section" id="s8">
+      <div class="section-header">
+        <div class="section-tag">Chapter 09</div>
+        <div class="section-title">Async / Await</div>
+        <div class="section-desc">Write asynchronous code that reads like synchronous code.</div>
+      </div>
+
+      <h3>The Same Fetch, Cleaner</h3>
+      <pre><code><span class="kw">async function</span> <span class="fn">getUser</span>(id) {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> res  = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">`/api/users/${id}`</span>);
+    <span class="kw">if</span> (!res.ok) <span class="kw">throw new</span> <span class="fn">Error</span>(<span class="str">`HTTP ${res.status}`</span>);
+    <span class="kw">const</span> user = <span class="kw">await</span> res.<span class="fn">json</span>();
+    <span class="kw">return</span> user;
+  } <span class="kw">catch</span> (err) {
+    <span class="fn">console</span>.<span class="fn">error</span>(<span class="str">'Failed:'</span>, err);
+  }
+}</code></pre>
+
+      <h3>Parallel Requests</h3>
+      <pre><code><span class="cm">// Sequential (slow — waits for each)</span>
+<span class="kw">const</span> user  = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">'/user'</span>).<span class="fn">then</span>(r=>r.<span class="fn">json</span>());
+<span class="kw">const</span> posts = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">'/posts'</span>).<span class="fn">then</span>(r=>r.<span class="fn">json</span>());
+
+<span class="cm">// Parallel (fast — fires both at once)</span>
+<span class="kw">const</span> [user, posts] = <span class="kw">await</span> Promise.<span class="fn">all</span>([
+  <span class="fn">fetch</span>(<span class="str">'/user'</span>).<span class="fn">then</span>(r=>r.<span class="fn">json</span>()),
+  <span class="fn">fetch</span>(<span class="str">'/posts'</span>).<span class="fn">then</span>(r=>r.<span class="fn">json</span>()),
+]);</code></pre>
+
+      <h3>Promises Explained</h3>
+      <div class="flow" style="flex-direction:column;align-items:flex-start;gap:6px">
+        <div style="display:flex;align-items:center;gap:8px"><span class="badge badge-amber">pending</span><span style="font-size:12px;color:var(--muted)">→ operation in progress</span></div>
+        <div style="display:flex;align-items:center;gap:8px"><span class="badge badge-green">fulfilled</span><span style="font-size:12px;color:var(--muted)">→ completed successfully → .then()</span></div>
+        <div style="display:flex;align-items:center;gap:8px"><span class="badge badge-red">rejected</span><span style="font-size:12px;color:var(--muted)">→ failed → .catch()</span></div>
+      </div>
+
+      <pre><code><span class="cm">// Create your own Promise</span>
+<span class="kw">const</span> delay = (ms) => <span class="kw">new</span> <span class="fn">Promise</span>(resolve =>
+  <span class="fn">setTimeout</span>(resolve, ms)
+);
+
+<span class="kw">await</span> <span class="fn">delay</span>(2000); <span class="cm">// pause 2 seconds</span></code></pre>
+    </div>
+
+    <!-- 9: RENDERING DATA -->
+    <div class="section" id="s9">
+      <div class="section-header">
+        <div class="section-tag">Chapter 10</div>
+        <div class="section-title">Rendering API Data to the DOM</div>
+        <div class="section-desc">The full loop: fetch → transform → render → update.</div>
+      </div>
+
+      <h3>The Pattern</h3>
+      <pre><code><span class="kw">async function</span> <span class="fn">loadPosts</span>() {
+  <span class="cm">// 1. Show loading state</span>
+  container.innerHTML = <span class="str">'&lt;p&gt;Loading…&lt;/p&gt;'</span>;
+
+  <span class="kw">try</span> {
+    <span class="cm">// 2. Fetch</span>
+    <span class="kw">const</span> res   = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">'/api/posts'</span>);
+    <span class="kw">const</span> posts = <span class="kw">await</span> res.<span class="fn">json</span>();
+
+    <span class="cm">// 3. Render — template literal or createElement</span>
+    container.innerHTML = posts.<span class="fn">map</span>(p => <span class="str">`
+      &lt;div class="card"&gt;
+        &lt;h2&gt;${p.title}&lt;/h2&gt;
+        &lt;p&gt;${p.body}&lt;/p&gt;
+      &lt;/div&gt;
+    `</span>).<span class="fn">join</span>(<span class="str">''</span>);
+  } <span class="kw">catch</span> {
+    <span class="cm">// 4. Error state</span>
+    container.innerHTML = <span class="str">'&lt;p&gt;Failed to load.&lt;/p&gt;'</span>;
+  }
+}</code></pre>
+
+      <div class="callout callout-warn">Never inject user-supplied data into innerHTML — use textContent or DOM methods to prevent XSS attacks.</div>
+
+      <h3>DocumentFragment (performance)</h3>
+      <pre><code><span class="cm">// Build off-screen, then inject once</span>
+<span class="kw">const</span> frag = document.<span class="fn">createDocumentFragment</span>();
+
+items.<span class="fn">forEach</span>(item => {
+  <span class="kw">const</span> li = document.<span class="fn">createElement</span>(<span class="str">'li'</span>);
+  li.textContent = item.name;
+  frag.<span class="fn">appendChild</span>(li);
+});
+
+ul.<span class="fn">appendChild</span>(frag); <span class="cm">// one reflow only!</span></code></pre>
+
+      <div class="demo-box">
+        <div class="demo-bar"><span class="demo-dot"></span> Fetch & render posts</div>
+        <div class="demo-inner">
+          <button class="demo-btn" onclick="renderPosts()">Load 3 posts from API</button>
+          <div id="posts-out" style="margin-top:10px;display:flex;flex-direction:column;gap:6px"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10: STORAGE -->
+    <div class="section" id="s10">
+      <div class="section-header">
+        <div class="section-tag">Chapter 11</div>
+        <div class="section-title">Storage APIs</div>
+        <div class="section-desc">Persist data in the browser across sessions.</div>
+      </div>
+
+      <h3>localStorage vs sessionStorage</h3>
+      <table class="tbl">
+        <tr><th>Feature</th><th>localStorage</th><th>sessionStorage</th></tr>
+        <tr><td>Persists after close?</td><td>Yes</td><td>No</td></tr>
+        <tr><td>Scope</td><td>All tabs, same origin</td><td>This tab only</td></tr>
+        <tr><td>Limit</td><td>~5 MB</td><td>~5 MB</td></tr>
+        <tr><td>Type</td><td>Strings only</td><td>Strings only</td></tr>
+      </table>
+
+      <pre><code><span class="cm">// Write</span>
+localStorage.<span class="fn">setItem</span>(<span class="str">'theme'</span>, <span class="str">'dark'</span>);
+localStorage.<span class="fn">setItem</span>(<span class="str">'user'</span>, <span class="fn">JSON</span>.<span class="fn">stringify</span>({ id: 1 }));
+
+<span class="cm">// Read</span>
+<span class="kw">const</span> theme = localStorage.<span class="fn">getItem</span>(<span class="str">'theme'</span>);
+<span class="kw">const</span> user  = <span class="fn">JSON</span>.<span class="fn">parse</span>(localStorage.<span class="fn">getItem</span>(<span class="str">'user'</span>));
+
+<span class="cm">// Delete</span>
+localStorage.<span class="fn">removeItem</span>(<span class="str">'theme'</span>);
+localStorage.<span class="fn">clear</span>();   <span class="cm">// wipe everything</span></code></pre>
+
+      <h3>Cookies (briefly)</h3>
+      <pre><code><span class="cm">// Basic — set with expiry</span>
+document.cookie = <span class="str">`token=abc; max-age=3600; path=/`</span>;
+
+<span class="cm">// Secure: use HttpOnly cookies (set by server)</span>
+<span class="cm">// Modern alternative: Cookie Store API</span></code></pre>
+
+      <div class="demo-box">
+        <div class="demo-bar"><span class="demo-dot"></span> localStorage playground</div>
+        <div class="demo-inner">
+          <input class="demo-input" id="ls-key" placeholder="Key" value="myKey"/>
+          <input class="demo-input" id="ls-val" placeholder="Value" value="Hello!"/>
+          <div style="display:flex;gap:6px;margin-bottom:10px">
+            <button class="demo-btn" onclick="lsSet()">Set</button>
+            <button class="demo-btn-out" onclick="lsGet()">Get</button>
+            <button class="demo-btn-out" onclick="lsDel()">Delete</button>
+          </div>
+          <div class="demo-output" id="ls-out">Ready</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11: PLAYGROUND -->
+    <div class="section" id="s11">
+      <div class="section-header">
+        <div class="section-tag">Chapter 12</div>
+        <div class="section-title">Live Playground</div>
+        <div class="section-desc">Write JS and see results instantly — everything you learned, in action.</div>
+      </div>
+      <div class="callout callout-info">This sandbox runs in an iframe. You have access to <span class="ic">document</span>, <span class="ic">fetch</span>, <span class="ic">localStorage</span>, and all DOM APIs.</div>
+      <textarea id="playground" style="width:100%;height:180px;background:var(--bg2);border:0.5px solid var(--border);border-radius:8px;padding:14px;font-family:var(--mono);font-size:12px;color:var(--ink);resize:vertical;outline:none;line-height:1.7">// Try anything — DOM, fetch, events
+const ul = document.createElement('ul');
+['Apple', 'Mango', 'Litchi'].forEach(fruit => {
+  const li = document.createElement('li');
+  li.textContent = fruit;
+  li.style.padding = '4px 0';
+  ul.appendChild(li);
+});
+output.appendChild(ul);
+
+// Fetch example (uncomment):
+// const r = await fetch('https://jsonplaceholder.typicode.com/users/1');
+// const u = await r.json();
+// output.textContent = JSON.stringify(u, null, 2);</textarea>
+      <div style="display:flex;gap:8px;margin:10px 0">
+        <button class="demo-btn" onclick="runPlayground()">Run code</button>
+        <button class="demo-btn-out" onclick="clearPlayground()">Clear output</button>
+      </div>
+      <div class="demo-bar" style="border-radius:8px 8px 0 0;border:0.5px solid var(--border)"><span class="demo-dot"></span> Output</div>
+      <div id="pg-out" style="min-height:60px;padding:14px;background:var(--bg2);border:0.5px solid var(--border);border-top:none;border-radius:0 0 8px 8px;font-size:13px;color:var(--ink)">Output appears here</div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+const sections = 12;
+let cur = 0;
+
+function go(n) {
+  document.getElementById('s'+cur).classList.remove('active');
+  document.querySelectorAll('.nav-item')[cur].classList.remove('active');
+  cur = n;
+  document.getElementById('s'+cur).classList.add('active');
+  document.querySelectorAll('.nav-item')[cur].classList.add('active');
+  document.getElementById('progress-bar').style.width = Math.round((n+1)/sections*100) + '%';
+  document.querySelector('.content').scrollTop = 0;
+}
+
+// S0: inspect doc
+function inspectDoc() {
+  const o = document.getElementById('doc-out');
+  o.textContent = `document.title: "${document.title}"
+document.URL: ${document.URL}
+document.childElementCount: ${document.childElementCount}
+document.body.children.length: ${document.body.children.length}
+document.readyState: "${document.readyState}"`;
+}
+
+// S1: selector
+function trySelector() {
+  const sel = document.getElementById('sel-in').value.trim();
+  const out = document.getElementById('sel-out');
+  try {
+    const el = document.querySelector(sel);
+    if (!el) { out.textContent = 'null — no element matches "'+sel+'"'; return; }
+    out.textContent = `Found: <${el.tagName.toLowerCase()}${el.id?' id="'+el.id+'"':''}${el.className?' class="'+el.className+'"':''}>\nchildren: ${el.children.length}\ntextContent: "${el.textContent.slice(0,60).trim()}…"`;
+  } catch(e) { out.textContent = 'Error: '+e.message; }
+}
+
+// S2: read/write
+let rwToggle = false;
+function rwDemo(type) {
+  const box = document.getElementById('rw-box');
+  const out = document.getElementById('rw-out');
+  if (type === 'text') {
+    box.textContent = 'textContent set at '+new Date().toLocaleTimeString();
+    out.textContent = 'el.textContent = "…" — safe, strips any tags';
+  } else if (type === 'html') {
+    box.innerHTML = '<strong style="color:var(--accent)">innerHTML</strong> lets you set <em>rich</em> HTML';
+    out.textContent = 'el.innerHTML = "<strong>…</strong>" — can XSS if user data!';
+  } else if (type === 'style') {
+    rwToggle = !rwToggle;
+    box.style.background = rwToggle ? '#EFF6FF' : '';
+    box.style.color = rwToggle ? '#2563EB' : '';
+    box.style.fontWeight = rwToggle ? '700' : '';
+    out.textContent = 'el.style.background = "…" — inline style toggled';
+  } else if (type === 'class') {
+    box.classList.toggle('active');
+    box.style.borderColor = box.classList.contains('active') ? '#2563EB' : '';
+    out.textContent = 'el.classList.toggle("active") — classes: ' + box.className;
+  }
+}
+
+// S3: create/delete
+let itemCount = 0;
+function addItem() {
+  const val = document.getElementById('create-in').value.trim() || 'Item';
+  itemCount++;
+  const li = document.createElement('li');
+  li.textContent = `${itemCount}. ${val}`;
+  li.style.cssText = 'margin:4px 0;padding:4px 0;animation:fadeIn 0.2s';
+  document.getElementById('demo-list').appendChild(li);
+}
+function removeFirst() {
+  const ul = document.getElementById('demo-list');
+  if (ul.firstElementChild) ul.firstElementChild.remove();
+}
+function clearList() { document.getElementById('demo-list').replaceChildren(); itemCount = 0; }
+
+// S4: events
+const evTarget = document.getElementById('ev-target');
+const evOut = document.getElementById('ev-out');
+if (evTarget) {
+  evTarget.addEventListener('click', e => {
+    evOut.textContent = `type: click\ntarget: ${e.target.tagName}\nclientX: ${e.clientX}, clientY: ${e.clientY}\ntimeStamp: ${Math.round(e.timeStamp)}ms`;
+  });
+  evTarget.addEventListener('mousemove', e => {
+    evOut.textContent = `type: mousemove\nclientX: ${e.clientX}, clientY: ${e.clientY}`;
+  });
+  document.addEventListener('keydown', e => {
+    if (document.activeElement === evTarget || evTarget.matches(':hover')) return;
+    evOut.textContent = `type: keydown\nkey: "${e.key}"\nshiftKey: ${e.shiftKey}\nctrlKey: ${e.ctrlKey}`;
+  });
+}
+
+// S5: delegation
+const delList = document.getElementById('del-list');
+if (delList) {
+  delList.addEventListener('click', e => {
+    const li = e.target.closest('li');
+    if (!li) return;
+    document.querySelectorAll('#del-list li').forEach(l => l.style.background = '');
+    li.style.background = 'var(--accent-light)';
+    document.getElementById('del-out').textContent =
+      `Clicked via delegation!\ne.target.tagName: ${e.target.tagName}\ndata-id: ${li.dataset.id}\nOne listener on <ul> caught this`;
+  });
+}
+
+// S6: forms
+function submitForm() {
+  const name  = document.getElementById('f-name').value;
+  const email = document.getElementById('f-email').value;
+  const role  = document.getElementById('f-role').value;
+  const agreed= document.getElementById('f-check').checked;
+  const out   = document.getElementById('f-out');
+  if (!name) { out.textContent = 'Validation: name is required!'; return; }
+  out.textContent = JSON.stringify({ name, email, role, agreed }, null, 2);
+}
+
+// S7: fetch
+async function doFetch() {
+  const out = document.getElementById('fetch-out');
+  const st  = document.getElementById('fetch-state');
+  const id  = Math.floor(Math.random() * 10) + 1;
+  st.className = 'state-pill state-loading';
+  st.textContent = 'loading…';
+  out.textContent = 'Fetching user #'+id+'…';
+  try {
+    const res  = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
+    if (!res.ok) throw new Error('HTTP '+res.status);
+    const data = await res.json();
+    st.className = 'state-pill state-success';
+    st.textContent = '200 OK';
+    out.textContent = `name: ${data.name}\nemail: ${data.email}\nphone: ${data.phone}\nwebsite: ${data.website}\ncompany: ${data.company.name}`;
+  } catch(e) {
+    st.className = 'state-pill state-error';
+    st.textContent = 'error';
+    out.textContent = 'Error: '+e.message;
+  }
+}
+
+// S9: render posts
+async function renderPosts() {
+  const out = document.getElementById('posts-out');
+  out.innerHTML = '<div style="color:var(--muted);font-size:13px">Loading posts…</div>';
+  try {
+    const res   = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=3');
+    const posts = await res.json();
+    out.innerHTML = '';
+    posts.forEach(p => {
+      const card = document.createElement('div');
+      card.style.cssText = 'background:var(--bg2);border:0.5px solid var(--border);border-radius:8px;padding:12px';
+      const title = document.createElement('div');
+      title.textContent = p.title;
+      title.style.cssText = 'font-weight:500;font-size:13px;margin-bottom:4px;color:var(--ink)';
+      const body = document.createElement('div');
+      body.textContent = p.body.slice(0, 80) + '…';
+      body.style.cssText = 'font-size:12px;color:var(--muted);line-height:1.5';
+      card.appendChild(title);
+      card.appendChild(body);
+      out.appendChild(card);
+    });
+  } catch(e) {
+    out.innerHTML = '<div style="color:var(--red);font-size:13px">Error: '+e.message+'</div>';
+  }
+}
+
+// S10: localStorage
+function lsSet() {
+  const k = document.getElementById('ls-key').value;
+  const v = document.getElementById('ls-val').value;
+  localStorage.setItem(k, v);
+  document.getElementById('ls-out').textContent = `localStorage.setItem("${k}", "${v}") — saved!`;
+}
+function lsGet() {
+  const k = document.getElementById('ls-key').value;
+  const v = localStorage.getItem(k);
+  document.getElementById('ls-out').textContent = v !== null ? `localStorage.getItem("${k}") → "${v}"` : `Key "${k}" not found → null`;
+}
+function lsDel() {
+  const k = document.getElementById('ls-key').value;
+  localStorage.removeItem(k);
+  document.getElementById('ls-out').textContent = `localStorage.removeItem("${k}") — deleted`;
+}
+
+// S11: playground
+async function runPlayground() {
+  const code = document.getElementById('playground').value;
+  const output = document.getElementById('pg-out');
+  output.innerHTML = '';
+  const container = document.createElement('div');
+  container.id = 'output';
+  output.appendChild(container);
+
+  try {
+    const wrapped = `(async function(output) { ${code} })(container)`;
+    await eval(wrapped);
+  } catch(e) {
+    container.innerHTML = `<span style="color:var(--red);font-family:var(--mono);font-size:12px">Error: ${e.message}</span>`;
+  }
+}
+function clearPlayground() { document.getElementById('pg-out').innerHTML = ''; }
+</script>

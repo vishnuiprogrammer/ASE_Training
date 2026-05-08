@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/DOMPractices.js" defer></script>
+</head>
+<>
+    <input type="text" name="name" id="inp" value="<a href='#'> Hello World! </a>"/>
+    <div id="display"></div>
+    <!-- 
+        innerHTML = Security Issues XSS-Attack 
+        innerText = Handle Plain Text
+    -->
+
+
+
+    <form action="#" id="frm">
+        First Name: <input type="text" name="fName"  value="Vishnu"> <br>
+        Last Name: <input type="text" name="lName"  value="Bansode"> <br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <div id="info"></div>
+
+
+
+    <div>
+        <button id="red" type="submit" value="red" onclick="document.getElementById('red').style.backgroundColor=document.getElementById('red').value">Red</button>
+        <button id="blue" type="submit" value="blue" onclick="document.getElementById('blue').style.backgroundColor=document.getElementById('blue').value">blue</button>
+        <button id="green" type="submit" value="green" onclick="document.getElementById('green').style.backgroundColor=document.getElementById('green').value">green</button>
+        <button id="yellow" type="submit" value="yellow" onclick="document.getElementById('yellow').style.cssText=`backgroundColor:document.getElementById('yellow').value;color:white;`">yellow</button>
+        <button id="black" type="submit" value="black" onclick="document.getElementById('black').style.backgroundColor=document.getElementById('black').value">black</button>
+        <button id="pink" type="submit" value="pink" onclick="document.getElementById('pink').style.backgroundColor=document.getElementById('pink').value">pink</button>
+
+
+
+
+    </div>
+
+    <!-- <img src="https://cdn.vectorstock.com/i/1000v/05/10/realistic-light-bulb-icon-turning-on-vector-28050510.jpg" alt="lighton" id="img">
+    <button type="submit" onclick="document.getElementById('img').src='https://cdn.vectorstock.com/i/1000v/05/10/realistic-light-bulb-icon-turning-on-vector-28050510.jpg'">On</button > 
+    <button type="submit" onclick="document.getElementById('img').src='data:image/jpeg;base64,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'">Off</button > -->
+
+
+        <!-- Draggable element -->
+<img id="drag1" src="https://toppng.com/uploads/preview/cartoon-11551057788bw864qbup7.png" draggable="true" ondragstart="drag(event)">
+
+<!-- Drop target -->
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+<script>
+function allowDrop(ev) {
+  ev.preventDefault(); // Required to allow a drop
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id); // Save the ID
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  const data = ev.dataTransfer.getData("text"); // Get the ID
+  ev.target.appendChild(document.getElementById(data)); // Perform event
+}
+</script>
+
+    </body>
+</html>
