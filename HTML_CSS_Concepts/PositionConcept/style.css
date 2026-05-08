@@ -1,0 +1,54 @@
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      
+    }
+    body{
+        height: 1500px;
+    }
+
+    .static-box {
+      background: lightgray;
+      padding: 10px;
+    }
+
+    .relative-box {
+      position: relative;
+      top: 10px;
+      left: 10px;
+      background: lightblue;
+      padding: 10px;
+    }
+
+    .parent {
+      position: relative;
+      height: 150px;
+      background: lightyellow;
+      margin: 20px;
+    }
+
+    .absolute-box {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: orange;
+      padding: 10px;
+    }
+
+    .fixed-box {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      background: red;
+      color: white;
+      padding: 10px;
+    }
+
+    .sticky-box {
+      position: sticky;
+      top: 0;
+      background: black;
+      color: white;
+      padding: 10px;
+    }

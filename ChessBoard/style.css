@@ -1,0 +1,24 @@
+/* It applies color only If row & col is same ->even or odd*/
+/* tr:nth-child(even) td:nth-child(even),tr:nth-child(odd) td:nth-child(odd) {
+    background: black; 
+   
+} */ OR
+
+tr:nth-child(2n) td:nth-child(2n), tr:nth-child(2n+1) td:nth-child(2n+1){
+    background-color: black;
+}
+
+td{
+    height: 5vw;
+    width: 5vw;
+}
+
+.table-div{
+    width: 100%;
+    height:  100%;
+}
+table{
+    border: 7px solid black;
+    margin: auto;
+    
+} /* Apply Border and Make center chessbox */

@@ -1,0 +1,50 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+
+html, body{
+    width: 100%;
+}
+
+.form-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+}
+
+table{
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+    border-collapse: collapse;
+    table-layout: fixed; 
+}
+
+th{
+    text-align: left;
+    background-color: rgb(48, 129, 200);
+    color: aliceblue;
+}
+
+table,th, td{
+    border: 1px solid black;
+}
+
+th,td{
+    padding: 6px;
+    word-wrap: break-word;
+}
+
+input {
+    max-width: 100%;
+    box-sizing: border-box;
+    border: 1px solid black;
+}
+
+

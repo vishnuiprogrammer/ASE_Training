@@ -1,0 +1,47 @@
+
+    .box1 {
+      float: left;
+      width: 150px;
+      height: 150px;
+      background: lightblue;
+      margin: 10px;
+      text-align: center;
+
+    }
+
+    .box2 {
+      float: left;
+      width: 200px;
+      height: 100px;
+      background: lightgreen;
+      margin: 10px;
+      text-align: center;
+
+    }
+
+    .box3 {
+      float: right;
+      width: 100px;
+      height: 200px;
+      background: orange;
+      margin: 10px;
+      text-align: center;
+
+    }
+
+    .box4 {
+      float: left;
+      width: 120px;
+      height: 120px;
+      background: pink;
+      margin: 10px;
+      text-align: center;
+
+    }
+
+    .clear-box {
+      clear: both;
+      background: lightcoral;
+      padding: 20px;
+      text-align: center;
+    }

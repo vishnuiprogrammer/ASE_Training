@@ -1,0 +1,72 @@
+body {
+  background-color: rgb(238, 241, 245);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+    .card {
+    border: 1px solid #ddd; /* soft border */
+    border-radius: 10px;
+    max-width: 550px;
+    width: 100%;
+    max-height: 500px;
+    margin: 20px;
+    padding: 12px;
+    overflow: hidden;
+    /* soft shadow */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    
+
+    transition: max-height 2s ease-in-out;
+    }
+
+img {
+  max-width: 220px;
+  height: auto;
+  margin: 10px;
+
+  border-radius: 6px; /* smooth edges */
+}
+
+.img-left {
+  float: left;
+}
+
+.img-center {
+  display: block;
+  margin: 10px auto;
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #ddd;
+}
+
+p {
+  text-align: justify;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #333333;
+  word-break: normal; /* prevents ugly breaking */
+  overflow-wrap: normal; /* keeps words intact */
+}
+
+/* First letter */
+p::first-letter {
+  font-size: 200%;
+  font-weight: bold;
+}
+
+body {
+  background-color: #FFFDD0;
+}
+
+.card:hover{
+    max-height: 1200px;
+    transform: scale(1.05);
+}

@@ -1,0 +1,542 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family:
+    "Segoe UI", sans-serif; /* THIS FONTS FROM MICROSOFT FOR THE CLEAR & CLEAN READING  */
+}
+
+body {
+  background: #ffffff;
+}
+
+/* NAVBAR CSS*/
+/* IT USES FLEXBOX LAYOUT FOR HEADER & SPACE BETWEEN FOR ELEMENTS IN HEADER */
+.navbar {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100px;
+  padding: 14px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: linear-gradient(
+    rgba(16, 46, 34, 0.85),
+    rgba(64, 95, 83, 0.7)
+  ); /* GIVE SMOOTH COLOR TRANSITION */
+}
+
+.logo img {
+  width: clamp(100px, 16vw, 240px); /* IT TAKES PARAMETER (MIN, PREFER,MAX) https://css-tricks.com/almanac/functions/c/clamp/ */
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 22px;
+  font-weight: 700;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  color: #ad956b;
+}
+
+.book-btn {
+  background: #f4a300;
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 12px;
+}
+
+.book-btn:hover {
+  background: #ffc14d;
+}
+
+/*  HERO SECTION(MAIN SECTION)  */
+/* IT USES FLEXBOX LAYOUT  */
+.hero-section {
+  min-height: 720px;
+  background-image: url("assets/Hero-Section_FortTopView.jpeg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}  
+/* BG -Img FOR HERO Section */
+
+.hero-overlay {
+  min-height: 720px;
+  padding: 140px 60px 80px;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  background: linear-gradient(rgba(16, 46, 34, 0.72), rgba(0, 0, 0, 0.28)); /* It assign smooth coloring to img */
+}
+
+
+.hero-content {
+  max-width: 620px;
+  color: white;
+}
+
+.hero-content h1 {
+  font-size: clamp(38px, 5vw, 64px);
+}
+
+.hero-content p {
+  margin: 24px 0;
+  font-size: 20px;
+  color: #e5e7eb;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.primary-btn,
+.secondary-btn {
+  padding: 14px 28px;
+  border-radius: 14px;
+  font-size: 16px;
+  border: none;
+  transition: all 1s;
+}
+
+/* Taken color reference  https://designerly.com/best-button-colors-for-websites/ */
+
+.primary-btn {
+  background: #f4a300;
+  color: white;
+}
+
+.secondary-btn {
+  background: white;
+  color: #111827;
+}
+
+.primary-btn:hover {
+  font-size: 20px;
+  font-weight: 700;
+}
+.secondary-btn:hover {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/*  BOOKING CARD */
+.booking-card {
+  width: 360px;
+  background: white;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transition: 0.4s;
+}
+
+.booking-card:hover {
+  transform: scale(1.05);
+} /* IT ZOOMS THE CARD FOR BETTER VISUALIZATION */
+
+.booking-card h2 {
+  font-size: 44px;
+  color: #163e2c;
+}
+
+.booking-card span {
+  font-size: 18px;
+  color: #4b5563;
+}
+
+.booking-card p {
+  margin: 10px 0 20px;
+  color: #6b7280;
+}
+
+.booking-card ul {
+  list-style: none;
+  margin: 20px 0;
+}
+
+.booking-card li {
+  padding: 10px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.booking-card button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 18px;
+
+  background: #f4a300;
+  color: white;
+  border-radius: 14px;
+}
+
+.booking-card .small {
+  text-align: center;
+  margin-top: 12px;
+  color: #234e3a;
+}
+
+/* INFO BAR */
+/* IT USES GRIDLAYOUT INITIALLY DIVIDE CARDS IN EQUAL 4 SIZES */
+.info-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 18px 60px;
+
+  text-align: center;
+
+  color: #163e2c;
+
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* WHY CHOOSE  */
+.why-choose {
+  padding: 20px 5%;
+  background: #ffffff;
+}
+
+.why-choose h2 {
+  font-size: 42px;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+.card {
+  background: #f7f7f2;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}  
+/* Make card up for smooth visualizion */
+
+.card-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 28px;
+}
+
+.card-image img {
+  width: 70px;
+}
+
+.card-content {
+  padding: 22px;
+}
+
+.card-content h3 {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.card-content p {
+  font-size: 16px;
+  color: #555;
+}
+
+/* Join us for Memories */
+/* IT USES GRIDLAYOUT INITIALLY DIVIDE CARDS IN EQUAL 4 SIZES */
+
+.pickup-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.pickup-section {
+  padding: 10px 5%;
+  background: #ffffff;
+}
+
+.pickup-section h2 {
+  margin-bottom: 20px;
+}
+.card {
+  background: #f7f7f2;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.pickup-section .card img {
+  width: 400px;
+  height: 250px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}  /* Make card up for smooth visualizion */
+
+
+.card h3 {
+  color: #111827;
+}
+
+.card p {
+  color: #4b5563;
+}
+
+/* PACKAGES */
+/* IT USES GRIDLAYOUT INITIALLY DIVIDE CARDS IN EQUAL 3 SIZES */
+
+.package-section {
+  padding: 40px 5%;
+  background: #ffffff;
+}
+
+.package-section h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #111827;
+}
+
+.package-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.package-card {
+  background: #f7f7f2;
+  border-radius: 14px;
+  padding: 20px;
+  text-align: left;
+  transition: 0.3s;
+  position: relative;
+  border: 2px solid #163e2c;
+}
+
+.package-card:hover {
+  transform: translateY(-6px);
+}  /* Make card up for smooth visualizion */
+
+
+.package-card h2 {
+  font-size: 32px;
+  color: #163e2c;
+}
+
+.package-card h2 span {
+  font-size: 16px;
+  color: #6b7280;
+}
+
+.package-card ul {
+  list-style: none;
+  margin: 20px 0;
+}
+
+.package-card ul li {
+  padding: 10px 0;
+}
+
+.package-card button {
+  width: 100%;
+  padding: 12px;
+  background: #163e2c;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.package-card button:hover {
+  background: #14532d;
+}
+
+.package-card small {
+  display: block;
+  margin-top: 10px;
+  color: #6b7280;
+}
+
+.package-card.popular .badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #163e2c;
+  color: #fff;
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 8px;
+}
+/* Give the badge at top right to popular card*/
+
+.package-card:hover {
+  transform: scale(1.05);
+}
+
+
+/* FOOTER */
+
+.footer {
+  background-image:
+    linear-gradient(rgba(16, 46, 34, 0.95), rgba(16, 46, 34, 0.9)),
+    url("assets/Sunrise-Img(2).jpeg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
+  padding: 60px 8% 30px;
+}
+
+
+/* IT USES GRIDLAYOUT INITIALLY DIVIDE CARDS IN EQUAL 3 SIZES */
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+/* Columns */
+.footer-col img {
+  width: 160px;
+  margin-bottom: 15px;
+}
+
+.footer-sentence {
+  color: #d1d5db;
+  font-size: 15px;
+  max-width: 280px;
+}
+
+.footer-col h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: #f4a300;
+}
+
+.footer-col a {
+  display: block;
+  text-decoration: none;
+  color: #e5e7eb;
+  margin-bottom: 8px;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.footer-col a:hover {
+  color: #f4a300;
+  padding-left: 5px;
+}
+
+.footer-col p {
+  margin-bottom: 10px;
+  font-size: 15px;
+  color: #e5e7eb;
+}
+
+.footer-col i {
+  margin-right: 8px;
+  color: #f4a300;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: 30px;
+  padding-top: 15px;
+  text-align: center;
+  font-size: 14px;
+  color: #d1d5db;
+}
+
+/* REFERED ARTICLE FOR MAKING RESPONSIVE WEBPAGE https://stackoverflow.com/questions/13847755/css-media-queries-for-screen-sizes   
+https://www.freecodecamp.org/news/css-media-queries-breakpoints-media-types-standard-resolutions-and-more/ */
+
+
+/* FOR TABLETS  */
+@media (max-width: 1024px) {
+  .cards-container,
+  .pickup-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* FOR MOBILE & SMALL TABLET */
+@media (max-width: 768px) {
+  .navbar {
+    height: auto;
+    padding: 16px 20px;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .hero-overlay {
+    flex-direction: column;
+    text-align: center;
+    padding: 140px 20px 60px;
+  }
+
+  .booking-card {
+    width: 100%;
+    max-width: 400px;
+  }
+
+
+  .info-bar {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    font-size: 14px;
+  }
+
+  .cards-container,
+  .pickup-grid,
+  .package-grid {
+    grid-template-columns: 1fr;
+  }
+  .pickup-grid .card img{
+    width: 100%;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .footer-sentence {
+    margin: auto;
+  }
+}
+
+/* FOR SMALL SCREENS */
+@media (max-width: 480px) {
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .primary-btn,
+  .secondary-btn {
+    width: 100%;
+  }
+}

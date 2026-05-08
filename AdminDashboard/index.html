@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style_.css" />
+    <title>Admin Dashboard</title>
+    <!-- https://tailadmin.com/blog/free-html-admin-dashboard -->
+  </head>
+  <body>
+    <input type="checkbox" id="menu-toggle" />
+
+    <div class="main-container">
+      <div class="sidebar">
+        <h2>Admin Dashboard</h2>
+        <!-- https://www.flaticon.com/free-icons  ICONS Used in web-application -->
+        <nav>
+          <a href="#dashboard">
+            <img src="assets/dashboard.png" alt="dashboard" />
+            <span>Dashboard</span>
+          </a>
+          <a href="#users">
+            <img src="assets/users.png" alt="users" />
+            <span>Users</span>
+          </a>
+          <a href="#reports">
+            <img src="assets/report.png" alt="report" />
+            <span>Reports</span>
+          </a>
+          <a href="#settings">
+            <img src="assets/settings.png" alt="settings" />
+            <span>Settings</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="header">
+        <div class="header__left">
+          <!-- https://www.piliapp.com/symbol/menu/  Hamburger ICON -->
+          <label for="menu-toggle" class="hamburger-icon">☰</label>
+          <img src="assets/logo.png" alt="logo" class="logo" />
+        </div>
+
+        <div class="header__items">
+          <div class="notification">
+            <img src="assets/notify.png" alt="notification" class="notify" />
+          </div>
+          <div class="profile">
+            <img
+              src="assets/admin-logo.png"
+              alt="profile"
+              class="profile_logo"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="main">
+        <div class="card-container">
+          <div class="card color-a">
+            <div class="circle c1"></div>
+            <div class="circle c2"></div>
+            <img src="assets/total_users.webp" alt="Total Users" />
+            <h2 class="number">1,204</h2>
+            <p class="label">Total Users</p>
+          </div>
+          <div class="card color-b">
+            <div class="circle c1"></div>
+            <div class="circle c2"></div>
+            <img src="assets/sales.png" alt="Sales" />
+            <h2 class="number">356 Orders</h2>
+            <p class="label">Sales</p>
+          </div>
+          <div class="card color-c">
+            <div class="circle c1"></div>
+            <div class="circle c2"></div>
+            <img src="assets/revenue.webp" alt="Revenue" />
+            <h2 class="number">₹48,920</h2>
+            <p class="label">Revenue</p>
+          </div>
+          <div class="card color-d">
+            <div class="circle c1"></div>
+            <div class="circle c2"></div>
+            <img src="assets/performance.png" alt="Performance" />
+            <h2 class="number">92%</h2>
+            <p class="label">Performance</p>
+          </div>
+        </div>
+        <div class="graph-section">
+          <img src="assets/graph.png" alt="Analytics Graph" />
+          <img src="assets/market.png" alt="Market">
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>© 2026 Admin Panel. All rights reserved.</p>
+        <div class="footer__links">
+          <a href="">Dashboard</a><a href="">Users</a><a href="">Reports</a
+          ><a href="">Settings</a>
+        </div>
+      </div>
+
+      <label for="menu-toggle" class="entire-body"></label>
+    </div>
+  </body>
+</html>

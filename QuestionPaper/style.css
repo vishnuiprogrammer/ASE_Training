@@ -1,0 +1,47 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+} /* Remove Browser Default Margin & Padding & Make content-box to border-box(fix-size) */
+
+h2{
+    text-align: center;
+    text-decoration: underline;
+}
+
+header{
+    margin-top: 40px;
+}
+
+.mg-left{
+    margin-left: 10%;
+}
+
+div ol{
+    margin-left: 0;
+    padding-left: 0;
+    list-style-position: inside;
+}  /* Remove the default left margin of ordered list */
+
+
+div{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.question div{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+div h3{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+div h2{
+    margin-left: 0;
+}
+
+.center{
+    text-align: center;
+}

@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+} /* Remove Browser Default Margin & Padding & Make content-box to border-box(fix-size) */
+
+h1 {
+  margin-top: 25px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+hr {
+  border: none;
+  border: 1px solid red;
+  margin-bottom: 10px;
+}
+
+h2 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+h1,
+h2,
+h3,
+p,
+hr {
+  margin-left: 10%;
+  margin-right: 10%;
+}

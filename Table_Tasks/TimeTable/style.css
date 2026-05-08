@@ -1,0 +1,27 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+} /* Remove Browser Default Margin & Padding & Make content-box to border-box(fix-size) */
+
+
+table{
+    width: 100%;
+    max-width: 900px;
+    margin: 30px auto;
+    border-collapse: collapse;
+    table-layout: fixed;  
+}
+
+table, th, td{
+    border: 1px solid black;
+}
+
+
+th, td{
+    padding: 1vw;      
+    font-size: 1.5vw;   
+    text-align: center;
+    word-wrap: break-word;
+}
+

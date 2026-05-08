@@ -1,0 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+} /* Remove Browser Default Margin & Padding & Make content-box to border-box(fix-size) */
+
+.line-col {
+  border: 2px solid rgb(207, 21, 21);
+}
+
+.main-div {
+  width: 90vw;
+  margin: 20px 60px;
+  padding: 10px 10px;
+}
+
+.img-left {
+  float: left;
+  border: 5px solid black;
+  margin: 20px;
+  max-width: 400px;
+  max-height: 400px;
+  width: 100%;
+  height: auto;
+} /* Moves img at left side & intial size is 400px*400px for smaller screen size width is fullscreen & height auto   */
+
+.img-right {
+  float: right;
+  border: 5px solid black;
+  margin: 20px;
+  max-width: 400px;
+  max-height: 400px;
+  width: 100%;
+  height: auto;
+} /* Moves img at right side & intial size is 400px*400px for smaller screen size width is fullscreen & height auto   */
+
+p {
+  text-align: justify;
+}

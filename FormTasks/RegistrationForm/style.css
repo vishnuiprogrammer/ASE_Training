@@ -1,0 +1,50 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+html, body{
+    width: 100%;
+}
+
+.form-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+}
+
+table{
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+    table-layout: fixed; 
+}
+
+td:nth-child(1), th:nth-child(1){
+    width: 40%;
+}
+
+td:nth-child(2), th:nth-child(2){
+    width: 60%;
+}
+
+table,th, td{
+    border: 1px solid black;
+}
+
+th,td{
+    padding: 12px;
+    word-wrap: break-word;
+}
+
+input, textarea {
+    max-width: 100%;
+    box-sizing: border-box;
+    border: 1px solid black;
+}
+
+
