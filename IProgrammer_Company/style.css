@@ -1,0 +1,19 @@
+.hero-section {
+  min-height: 90vh;
+  background:
+    linear-gradient(90deg, rgba(161, 59, 63, 0.9), rgba(59, 22, 75, 0.9)),
+    url("https://images.unsplash.com/photo-1521737604893-d14cc237f11d")
+      center/cover no-repeat;
+}
+
+.icon-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+@media (max-width: 576px) {
+  .hero-section h1 {
+    font-size: 2rem;
+  }
+}
